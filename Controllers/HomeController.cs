@@ -12,6 +12,9 @@ public class HomeController : Controller
     public IActionResult Genres() => View();
     public IActionResult AboutMe() => View();
 
+    // Explicit About page for Anthony Than
+    public IActionResult AnthonyThan() => View();
+
     public async Task<IActionResult> TopPicks()
     {
         var picks = await _db.Movies
