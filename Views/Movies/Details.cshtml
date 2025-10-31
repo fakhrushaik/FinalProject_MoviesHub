@@ -1,0 +1,25 @@
+﻿@model MoviesHub.Models.Movie
+@{
+    ViewData["Title"] = "Movie Details";
+}
+<h2>@Model.Title</h2>
+<div class="row">
+  <div class="col-md-3">
+    @if (!string.IsNullOrWhiteSpace(Model.PosterUrl))
+    {
+      <img src="@Model.PosterUrl" class="img-fluid rounded" alt="@Model.Title poster" />
+    }
+  </div>
+  <div class="col-md-9">
+    <dl class="row">
+      <dt class="col-sm-3">Director</dt><dd class="col-sm-9">@Model.Director</dd>
+      <dt class="col-sm-3">Year</dt><dd class="col-sm-9">@Model.Year</dd>
+      <dt class="col-sm-3">Genre</dt><dd class="col-sm-9">@Model.Genre</dd>
+      <dt class="col-sm-3">Runtime</dt><dd class="col-sm-9">@Model.RuntimeMins min</dd>
+      <dt class="col-sm-3">Rating</dt><dd class="col-sm-9">@Model.Rating/10</dd>
+    </dl>
+    <p>@Model.Description</p>
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Edit</a>
+    <a asp-action="Index" class="btn btn-secondary">Back</a>
+  </div>
+</div>

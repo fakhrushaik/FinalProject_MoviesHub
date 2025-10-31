@@ -1,0 +1,101 @@
+﻿@model IEnumerable<MoviesHub.Models.Movie>
+@{
+    ViewData["Title"] = "Movies";
+    string currentQ = ViewBag.CurrentSearch as string ?? "";
+    string currentGenre = ViewBag.CurrentGenre as string ?? "";
+    int? currentYear = ViewBag.CurrentYear as int?;
+    int? currentRatingMin = ViewBag.CurrentRatingMin as int?;
+    string currentSort = ViewBag.CurrentSort as string ?? "rating";
+    string currentDir = ViewBag.CurrentDir as string ?? "desc";
+
+    var genres = (IEnumerable<string>) (ViewBag.Genres ?? Array.Empty<string>());
+    var years  = (IEnumerable<int>)    (ViewBag.Years  ?? Array.Empty<int>());
+}
+<h2>Movies (Database)</h2>
+
+<form class="row gy-2 gx-2 mb-3" method="get">
+  <div class="col-12 col-md-4">
+    <input name="q" value="@currentQ" class="form-control" placeholder="Search title or director" />
+  </div>
+
+  <div class="col-6 col-md-3">
+    <select name="genre" class="form-select">
+      <option value="">All genres</option>
+      @foreach (var g in genres)
+      {
+        <option value="@g" selected="@(string.Equals(g, currentGenre, StringComparison.OrdinalIgnoreCase))">@g</option>
+      }
+    </select>
+  </div>
+
+  <div class="col-6 col-md-2">
+    <select name="year" class="form-select">
+      <option value="">Any year</option>
+      @foreach (var y in years)
+      {
+        <option value="@y" selected="@(currentYear.HasValue && currentYear.Value == y)">@y</option>
+      }
+    </select>
+  </div>
+
+  <div class="col-6 col-md-2">
+    <select name="ratingMin" class="form-select">
+      <option value="">Rating ≥</option>
+      @for (int r = 1; r <= 10; r++)
+      {
+        <option value="@r" selected="@(currentRatingMin.HasValue && currentRatingMin.Value == r)">@r</option>
+      }
+    </select>
+  </div>
+
+  <div class="col-6 col-md-2">
+    <select name="sort" class="form-select">
+      <option value="rating" selected="@(currentSort == "rating")">Sort: Rating</option>
+      <option value="year" selected="@(currentSort == "year")">Sort: Year</option>
+      <option value="title" selected="@(currentSort == "title")">Sort: Title</option>
+    </select>
+  </div>
+
+  <div class="col-6 col-md-2">
+    <select name="dir" class="form-select">
+      <option value="desc" selected="@(currentDir == "desc")">Desc</option>
+      <option value="asc" selected="@(currentDir == "asc")">Asc</option>
+    </select>
+  </div>
+
+  <div class="col-6 col-md-2 d-grid">
+    <button class="btn btn-outline-primary" type="submit">Filter</button>
+  </div>
+
+  <div class="col-6 col-md-2 d-grid">
+    <a asp-action="Index" class="btn btn-outline-secondary">Reset</a>
+  </div>
+</form>
+
+<p><a asp-action="Create" class="btn btn-success">Add New Movie</a></p>
+
+<table class="table table-striped align-middle">
+  <thead>
+    <tr>
+      <th>Title</th><th>Director</th><th>Year</th><th>Genre</th><th>Runtime</th><th>Rating</th><th></th>
+    </tr>
+  </thead>
+  <tbody>
+  @foreach (var m in Model)
+  {
+    <tr>
+      <td>@m.Title</td>
+      <td>@m.Director</td>
+      <td>@m.Year</td>
+      <td>@m.Genre</td>
+      <td>@m.RuntimeMins min</td>
+      <td>@m.Rating/10</td>
+      <td>
+        <a asp-action="Details" asp-route-id="@m.Id">Details</a> |
+        <a asp-action="Edit" asp-route-id="@m.Id">Edit</a> |
+        <a asp-action="Delete" asp-route-id="@m.Id">Delete</a>
+      </td>
+    </tr>
+  }
+  </tbody>
+</table>

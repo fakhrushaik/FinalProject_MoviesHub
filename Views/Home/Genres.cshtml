@@ -1,0 +1,19 @@
+﻿@{
+    ViewData["Title"] = "Genres";
+    var genres = new[] { "Action", "Drama", "Comedy", "Thriller", "Sci-Fi", "Animation" };
+}
+<h2>Genres</h2>
+<div class="row row-cols-1 row-cols-md-3 g-3">
+@foreach (var g in genres)
+{
+  <div class="col">
+    <div class="card h-100">
+      <div class="card-body">
+        <h5 class="card-title">@g</h5>
+        <p class="card-text">Explore @g movies and discover new favorites.</p>
+        <a class="btn btn-outline-primary" asp-controller="Movies" asp-action="Index" asp-route-genre="@g">View @g</a>
+      </div>
+    </div>
+  </div>
+}
+</div>

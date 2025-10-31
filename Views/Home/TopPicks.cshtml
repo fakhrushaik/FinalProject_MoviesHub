@@ -1,0 +1,30 @@
+﻿@model IEnumerable<MoviesHub.Models.Movie>
+@{
+    ViewData["Title"] = "Top Picks";
+}
+<h2>Top Picks</h2>
+
+@if (!Model.Any())
+{
+  <div class="alert alert-info">
+    No top picks yet. Mark some movies as <em>Top Pick</em> from the
+    <a asp-controller="Movies" asp-action="Index">Movies</a> list (Edit → check “Top pick”).
+  </div>
+}
+else
+{
+  <div class="row row-cols-1 row-cols-md-3 g-3">
+  @foreach (var m in Model)
+  {
+    <div class="col">
+      <div class="card h-100">
+        <div class="card-body">
+          <h5 class="card-title">@m.Title</h5>
+          <p class="card-text">@(!string.IsNullOrWhiteSpace(m.Description) ? m.Description : "No description.")</p>
+          <p class="mb-0"><small>@m.Genre • @m.Year • @m.Rating/10</small></p>
+        </div>
+      </div>
+    </div>
+  }
+  </div>
+}
