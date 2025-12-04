@@ -1,13 +1,27 @@
 using MoviesHub.Models;
 using Microsoft.EntityFrameworkCore;
 using MoviesHub.Data;
+using System.Runtime.InteropServices;
+using System.IO;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
 
+// Configure DbContext: use SQL Server on Windows (LocalDB) and SQLite on other platforms
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+{
+    if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+    {
+        options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+    }
+    else
+    {
+        // Use a local SQLite file for non-Windows environments (e.g., Linux dev container)
+        var dbPath = Path.Combine(builder.Environment.ContentRootPath, "movieshub.db");
+        options.UseSqlite($"Data Source={dbPath}");
+    }
+});
 
 var app = builder.Build();
 
@@ -28,12 +42,30 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
-// Seed initial data on first run
+// Seed initial data on first run (attempt migrations, but continue if migrations can't be applied in this environment)
 using (var scope = app.Services.CreateScope())
 {
+    var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
     var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-    db.Database.Migrate();                
-    await SampleMovieSeeder.RunAsync(db);          
+    try
+    {
+        db.Database.Migrate();
+        await SampleMovieSeeder.RunAsync(db);
+    }
+    catch (Exception ex)
+    {
+        // If migrations can't be applied (e.g., pending model changes or provider differences), fall back to EnsureCreated
+        logger.LogWarning(ex, "Database Migrate failed; attempting EnsureCreated fallback.");
+        try
+        {
+            db.Database.EnsureCreated();
+            await SampleMovieSeeder.RunAsync(db);
+        }
+        catch (Exception inner)
+        {
+            logger.LogError(inner, "Database initialization failed. The app will continue, but database-backed features may be unavailable.");
+        }
+    }
 }
 
 app.Run();
