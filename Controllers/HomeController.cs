@@ -17,6 +17,8 @@ public class HomeController : Controller
 
     // Explicit About page for Fakhruddin Shaik
     public IActionResult FakhruddinShaik() => View();
+    // Explicit About page for Advait Parab
+    public IActionResult AdvaitParab() { return View(); }
     public async Task<IActionResult> TopPicks()
     {
         var picks = await _db.Movies
