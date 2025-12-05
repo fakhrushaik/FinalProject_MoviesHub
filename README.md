@@ -15,7 +15,8 @@ This project was created for **IT 3047C – Web Server Application Development**
 | **Anthony Than** | About Me page, UI styling, Bootstrap layout, content updates |
 | **Fakhruddin Shaik** | About Me page, Home page redesign, About Movies content |
 | **Advait Parab** | About Me page and additional UI/content updates, navigation updates |
-| **Shared Work** | Database & migrations, MoviesController, Models, CRUD pages, testing, Git workflows |
+
+**Shared Work:** Database & migrations, MoviesController, Models, CRUD pages, testing, Git workflows
 
 Each team member has a personal “About Me” page under **Views/Home/**.
 
