@@ -63,4 +63,109 @@ public class MoviesController : Controller
 
         return View(list);
     }
+
+    // GET: Movies/Details/5
+    public async Task<IActionResult> Details(int? id)
+    {
+        if (id == null)
+            return NotFound();
+
+        var movie = await _db.Movies.FirstOrDefaultAsync(m => m.Id == id);
+        if (movie == null)
+            return NotFound();
+
+        return View(movie);
+    }
+
+    // GET: Movies/Create
+    public IActionResult Create()
+    {
+        return View();
+    }
+
+    // POST: Movies/Create
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Create([Bind("Id,Title,Director,Year,Genre,RuntimeMins,Rating,Description,PosterUrl,IsTopPick")] Movie movie)
+    {
+        if (ModelState.IsValid)
+        {
+            _db.Add(movie);
+            await _db.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+        return View(movie);
+    }
+
+    // GET: Movies/Edit/5
+    public async Task<IActionResult> Edit(int? id)
+    {
+        if (id == null)
+            return NotFound();
+
+        var movie = await _db.Movies.FindAsync(id);
+        if (movie == null)
+            return NotFound();
+
+        return View(movie);
+    }
+
+    // POST: Movies/Edit/5
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Director,Year,Genre,RuntimeMins,Rating,Description,PosterUrl,IsTopPick")] Movie movie)
+    {
+        if (id != movie.Id)
+            return NotFound();
+
+        if (ModelState.IsValid)
+        {
+            try
+            {
+                _db.Update(movie);
+                await _db.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!MovieExists(movie.Id))
+                    return NotFound();
+                else
+                    throw;
+            }
+            return RedirectToAction(nameof(Index));
+        }
+        return View(movie);
+    }
+
+    // GET: Movies/Delete/5
+    public async Task<IActionResult> Delete(int? id)
+    {
+        if (id == null)
+            return NotFound();
+
+        var movie = await _db.Movies.FirstOrDefaultAsync(m => m.Id == id);
+        if (movie == null)
+            return NotFound();
+
+        return View(movie);
+    }
+
+    // POST: Movies/Delete/5
+    [HttpPost, ActionName("Delete")]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> DeleteConfirmed(int id)
+    {
+        var movie = await _db.Movies.FindAsync(id);
+        if (movie != null)
+        {
+            _db.Movies.Remove(movie);
+            await _db.SaveChangesAsync();
+        }
+        return RedirectToAction(nameof(Index));
+    }
+
+    private bool MovieExists(int id)
+    {
+        return _db.Movies.Any(e => e.Id == id);
+    }
 }

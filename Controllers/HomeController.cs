@@ -10,13 +10,16 @@ public class HomeController : Controller
     public IActionResult Index() => View();
     public IActionResult AboutMovies() => View();
     public IActionResult Genres() => View();
-    public IActionResult AboutMe() => View();
+    public IActionResult Team() => View();
 
     // Explicit About page for Anthony Than
     public IActionResult AnthonyThan() => View();
 
     // Explicit About page for Fakhruddin Shaik
     public IActionResult FakhruddinShaik() => View();
+
+    // Explicit About page for Advait Parab
+    public IActionResult AdvaitParab() => View();
     public async Task<IActionResult> TopPicks()
     {
         var picks = await _db.Movies

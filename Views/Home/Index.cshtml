@@ -1,71 +1,104 @@
-﻿@{
+@{
     ViewData["Title"] = "Home";
 }
 
-<div class="p-5 mb-4 bg-light rounded-3">
+<div class="hero-section">
     <div class="container-fluid py-5">
-        <h1 class="display-5 fw-bold">Welcome to MoviesHub</h1>
-        <p class="col-md-9 fs-5">
-            MoviesHub is our team’s ASP.NET Core MVC project built around one of our shared hobbies:
-            watching and talking about movies. Together we designed the UI, created a SQL Server
-            database of films, and wired everything up with Entity Framework Core.
+        <h1 class="display-4 fw-bold mb-4">🎬 Welcome to MoviesHub</h1>
+        <p class="col-lg-8 fs-5 mb-4">
+            MoviesHub is our team's passion project—an ASP.NET Core MVC application celebrating our love for cinema. 
+            We've designed an elegant UI, built a comprehensive SQL Server database of films, and seamlessly integrated 
+            everything with Entity Framework Core to bring you the ultimate movie browsing experience.
         </p>
-        <a class="btn btn-primary btn-lg me-2" asp-controller="Movies" asp-action="Index">
-            Browse Movie Database
-        </a>
-        <a class="btn btn-outline-secondary btn-lg" asp-controller="Home" asp-action="AboutMovies">
-            Learn About Movies
-        </a>
+        <div class="d-flex flex-wrap gap-3">
+            <a class="btn btn-light btn-lg" asp-controller="Movies" asp-action="Index">
+                Browse Movie Database
+            </a>
+            <a class="btn btn-outline-light btn-lg" asp-controller="Home" asp-action="AboutMovies">
+                Learn About Movies
+            </a>
+            <a class="btn btn-outline-light btn-lg" asp-controller="Home" asp-action="TopPicks">
+                View Top Picks
+            </a>
+        </div>
     </div>
 </div>
 
 <div class="container">
+    <h2 class="text-center mb-5" style="color: #667eea; font-weight: 800;">Discover What We Offer</h2>
+    <div class="row g-4 mb-5">
+        <div class="col-md-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body text-center">
+                    <div class="mb-3" style="font-size: 3rem;">🎥</div>
+                    <h5 class="card-title">Comprehensive Movie Catalog</h5>
+                    <p class="card-text">
+                        Explore our curated collection backed by SQL Server. Browse movies, view detailed information, 
+                        and experience full CRUD operations powered by Entity Framework Core. Your personal cinema database awaits!
+                    </p>
+                    <a asp-controller="Movies" asp-action="Index" class="btn btn-primary">
+                        Explore Movies
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body text-center">
+                    <div class="mb-3" style="font-size: 3rem;">🍿</div>
+                    <h5 class="card-title">Dive Into Cinema</h5>
+                    <p class="card-text">
+                        Journey through film history, discover diverse genres, and understand what makes cinema magical. 
+                        From silent films to modern blockbusters, explore the evolution of storytelling on the silver screen.
+                    </p>
+                    <a asp-controller="Home" asp-action="AboutMovies" class="btn btn-primary">
+                        Learn More
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body text-center">
+                    <div class="mb-3" style="font-size: 3rem;">👥</div>
+                    <h5 class="card-title">Meet Our Team</h5>
+                    <p class="card-text">
+                        Built by passionate developers who love cinema. Each team member brought unique skills—from database 
+                        architecture to UI design. Discover the people behind MoviesHub and their individual contributions.
+                    </p>
+                    <a asp-controller="Home" asp-action="Team" class="btn btn-primary">
+                        Our Team
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="row g-4">
-        <div class="col-md-4">
-            <div class="card h-100 shadow-sm">
-                <div class="card-body">
-                    <h5 class="card-title">What Our App Does</h5>
-                    <p class="card-text">
-                        We built a small movie catalog backed by SQL Server. You can see a table of movies,
-                        view details, and experiment with CRUD operations using Entity Framework Core.
-                    </p>
-                    <a asp-controller="Movies" asp-action="Index" class="btn btn-sm btn-primary">
-                        Go to Movies
-                    </a>
-                </div>
+        <div class="col-lg-6">
+            <div class="feature-card">
+                <h4 style="color: #667eea;">⚡ Key Features</h4>
+                <ul class="list-unstyled mt-3">
+                    <li class="mb-2">✓ <strong>Full CRUD Operations</strong> - Create, read, update, and delete movies</li>
+                    <li class="mb-2">✓ <strong>Smart Search & Filter</strong> - Find movies by genre, year, or rating</li>
+                    <li class="mb-2">✓ <strong>Top Picks Collection</strong> - Curated selection of must-watch films</li>
+                    <li class="mb-2">✓ <strong>Responsive Design</strong> - Beautiful experience on any device</li>
+                    <li class="mb-2">✓ <strong>Entity Framework Core</strong> - Modern data access technology</li>
+                </ul>
             </div>
         </div>
-
-        <div class="col-md-4">
-            <div class="card h-100 shadow-sm">
-                <div class="card-body">
-                    <h5 class="card-title">Explore the Hobby</h5>
-                    <p class="card-text">
-                        On the About Movies and Genres pages, we explain why our team enjoys films,
-                        briefly walk through movie history, and highlight some favorite genres.
-                    </p>
-                    <a asp-controller="Home" asp-action="AboutMovies" class="btn btn-sm btn-primary">
-                        About Movies
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-4">
-            <div class="card h-100 shadow-sm">
-                <div class="card-body">
-                    <h5 class="card-title">Meet the Team</h5>
-                    <p class="card-text">
-                        Each team member contributed different pieces: database and migrations, controllers
-                        and models, styling with Bootstrap, and the content pages like this About Me section.
-                    </p>
-                    <a asp-controller="Home" asp-action="FakhruddinShaik" class="btn btn-sm btn-primary">
-                        About Fakhruddin
-                    </a>
-                    <a asp-controller="Home" asp-action="AnthonyThan" class="btn btn-sm btn-primary">
-                        About Anthony
-                    </a>
-                </div>
+        <div class="col-lg-6">
+            <div class="feature-card">
+                <h4 style="color: #764ba2;">🚀 Technology Stack</h4>
+                <ul class="list-unstyled mt-3">
+                    <li class="mb-2">✓ <strong>ASP.NET Core MVC</strong> - Robust web framework</li>
+                    <li class="mb-2">✓ <strong>SQL Server</strong> - Enterprise-grade database</li>
+                    <li class="mb-2">✓ <strong>Entity Framework Core</strong> - Object-relational mapping</li>
+                    <li class="mb-2">✓ <strong>Bootstrap 5</strong> - Modern responsive design</li>
+                    <li class="mb-2">✓ <strong>Razor Pages</strong> - Dynamic server-side rendering</li>
+                </ul>
             </div>
         </div>
     </div>

@@ -1,49 +1,181 @@
 ﻿@model MoviesHub.Models.Movie
 @{
-    ViewData["Title"] = "Create Movie";
+    ViewData["Title"] = "Add New Movie";
 }
-<h2>Create Movie</h2>
-<form asp-action="Create" method="post" class="row g-3">
-  <div class="col-md-6">
-    <label asp-for="Title" class="form-label"></label>
-    <input asp-for="Title" class="form-control" />
-    <span asp-validation-for="Title" class="text-danger"></span>
-  </div>
-  <div class="col-md-6">
-    <label asp-for="Director" class="form-label"></label>
-    <input asp-for="Director" class="form-control" />
-  </div>
-  <div class="col-md-3">
-    <label asp-for="Year" class="form-label"></label>
-    <input asp-for="Year" class="form-control" />
-    <span asp-validation-for="Year" class="text-danger"></span>
-  </div>
-  <div class="col-md-3">
-    <label asp-for="Genre" class="form-label"></label>
-    <input asp-for="Genre" class="form-control" />
-  </div>
-  <div class="col-md-3">
-    <label asp-for="RuntimeMins" class="form-label"></label>
-    <input asp-for="RuntimeMins" class="form-control" />
-    <span asp-validation-for="RuntimeMins" class="text-danger"></span>
-  </div>
-  <div class="col-md-3">
-    <label asp-for="Rating" class="form-label"></label>
-    <input asp-for="Rating" class="form-control" />
-    <span asp-validation-for="Rating" class="text-danger"></span>
-  </div>
-  <div class="col-12">
-    <label asp-for="PosterUrl" class="form-label"></label>
-    <input asp-for="PosterUrl" class="form-control" />
-  </div>
-  <div class="col-12">
-    <label asp-for="Description" class="form-label"></label>
-    <textarea asp-for="Description" class="form-control" rows="3"></textarea>
-  </div>
-  <div class="col-12">
-    <button type="submit" class="btn btn-primary">Save</button>
-    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
-  </div>
-</form>
+
+<div class="container mt-4 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <div class="card shadow-lg border-0">
+                <div class="card-header text-white text-center py-4" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                    <h2 class="mb-0 fw-bold">🎬 Add New Movie</h2>
+                    <p class="mb-0 mt-2">Fill in the details to add a movie to the database</p>
+                </div>
+                <div class="card-body p-4 p-md-5">
+                    <form asp-action="Create" method="post">
+                        <div class="row g-4">
+                            <!-- Title -->
+                            <div class="col-md-8">
+                                <div class="form-floating">
+                                    <input asp-for="Title" class="form-control" id="titleInput" placeholder="Movie Title" />
+                                    <label asp-for="Title">🎥 Movie Title *</label>
+                                    <span asp-validation-for="Title" class="text-danger small"></span>
+                                </div>
+                            </div>
+
+                            <!-- Year -->
+                            <div class="col-md-4">
+                                <div class="form-floating">
+                                    <input asp-for="Year" type="number" class="form-control" id="yearInput" placeholder="Year" min="1900" max="2100" />
+                                    <label asp-for="Year">📅 Release Year *</label>
+                                    <span asp-validation-for="Year" class="text-danger small"></span>
+                                </div>
+                            </div>
+
+                            <!-- Director -->
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input asp-for="Director" class="form-control" id="directorInput" placeholder="Director" />
+                                    <label asp-for="Director">🎬 Director</label>
+                                </div>
+                            </div>
+
+                            <!-- Genre -->
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <select asp-for="Genre" class="form-select" id="genreInput">
+                                        <option value="">-- Select Genre --</option>
+                                        <option value="Action">Action</option>
+                                        <option value="Adventure">Adventure</option>
+                                        <option value="Animation">Animation</option>
+                                        <option value="Comedy">Comedy</option>
+                                        <option value="Crime">Crime</option>
+                                        <option value="Drama">Drama</option>
+                                        <option value="Fantasy">Fantasy</option>
+                                        <option value="Horror">Horror</option>
+                                        <option value="Mystery">Mystery</option>
+                                        <option value="Romance">Romance</option>
+                                        <option value="Sci-Fi">Sci-Fi</option>
+                                        <option value="Thriller">Thriller</option>
+                                        <option value="Western">Western</option>
+                                    </select>
+                                    <label asp-for="Genre">🎭 Genre</label>
+                                </div>
+                            </div>
+
+                            <!-- Runtime -->
+                            <div class="col-md-4">
+                                <div class="form-floating">
+                                    <input asp-for="RuntimeMins" type="number" class="form-control" id="runtimeInput" placeholder="Runtime" min="1" max="500" />
+                                    <label asp-for="RuntimeMins">⏱️ Runtime (mins) *</label>
+                                    <span asp-validation-for="RuntimeMins" class="text-danger small"></span>
+                                </div>
+                            </div>
+
+                            <!-- Rating -->
+                            <div class="col-md-4">
+                                <div class="form-floating">
+                                    <input asp-for="Rating" type="number" class="form-control" id="ratingInput" placeholder="Rating" min="1" max="10" />
+                                    <label asp-for="Rating">⭐ Rating (1-10) *</label>
+                                    <span asp-validation-for="Rating" class="text-danger small"></span>
+                                </div>
+                            </div>
+
+                            <!-- Top Pick -->
+                            <div class="col-md-4 d-flex align-items-center">
+                                <div class="form-check form-switch ms-3">
+                                    <input asp-for="IsTopPick" class="form-check-input" type="checkbox" id="topPickSwitch" style="width: 3em; height: 1.5em;">
+                                    <label class="form-check-label ms-2" for="topPickSwitch">
+                                        <strong>✨ Mark as Top Pick</strong>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- Poster URL -->
+                            <div class="col-12">
+                                <div class="form-floating">
+                                    <input asp-for="PosterUrl" type="url" class="form-control" id="posterInput" placeholder="Poster URL" />
+                                    <label asp-for="PosterUrl">🖼️ Poster URL (optional)</label>
+                                    <div class="form-text">Enter the URL of the movie poster image</div>
+                                </div>
+                            </div>
+
+                            <!-- Description -->
+                            <div class="col-12">
+                                <label asp-for="Description" class="form-label fw-bold">📝 Description</label>
+                                <textarea asp-for="Description" class="form-control" id="descriptionInput" rows="4" placeholder="Enter a brief description or plot summary of the movie..."></textarea>
+                                <div class="form-text">Maximum 1000 characters</div>
+                            </div>
+
+                            <!-- Action Buttons -->
+                            <div class="col-12 mt-4">
+                                <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                                    <button type="submit" class="btn btn-primary btn-lg px-5">
+                                        <i class="bi bi-save"></i> Save Movie
+                                    </button>
+                                    <a asp-action="Index" class="btn btn-outline-secondary btn-lg px-5">
+                                        <i class="bi bi-x-circle"></i> Cancel
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="card-footer text-center text-muted py-3">
+                    <small>* Required fields</small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .form-floating > .form-control,
+    .form-floating > .form-select {
+        border: 2px solid #e2e8f0;
+        border-radius: 10px;
+        transition: all 0.3s ease;
+    }
+    
+    .form-floating > .form-control:focus,
+    .form-floating > .form-select:focus {
+        border-color: #667eea;
+        box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+    }
+    
+    .form-floating > label {
+        color: #64748b;
+    }
+    
+    .form-check-input:checked {
+        background-color: #667eea;
+        border-color: #667eea;
+    }
+    
+    .btn-primary {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border: none;
+        border-radius: 50px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+    
+    .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+    }
+    
+    .btn-outline-secondary {
+        border: 2px solid #cbd5e1;
+        border-radius: 50px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+    
+    .btn-outline-secondary:hover {
+        transform: translateY(-2px);
+        background-color: #f1f5f9;
+    }
+</style>
 
 @section Scripts { <partial name="_ValidationScriptsPartial" /> }
