@@ -15,6 +15,8 @@ public class HomeController : Controller
     // Explicit About page for Anthony Than
     public IActionResult AnthonyThan() => View();
 
+    // Explicit About page for Fakhruddin Shaik
+    public IActionResult FakhruddinShaik() => View();
     public async Task<IActionResult> TopPicks()
     {
         var picks = await _db.Movies

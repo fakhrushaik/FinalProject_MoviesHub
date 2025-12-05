@@ -1,10 +1,72 @@
 ﻿@{
     ViewData["Title"] = "Home";
 }
+
 <div class="p-5 mb-4 bg-light rounded-3">
-  <div class="container-fluid py-5">
-    <h1 class="display-5 fw-bold">Welcome to MoviesHub</h1>
-    <p class="col-md-8 fs-5">Explore genres, discover top picks, and manage your own movie list.</p>
-    <a class="btn btn-primary btn-lg" asp-controller="Movies" asp-action="Index">Browse Movies</a>
-  </div>
+    <div class="container-fluid py-5">
+        <h1 class="display-5 fw-bold">Welcome to MoviesHub</h1>
+        <p class="col-md-9 fs-5">
+            MoviesHub is our team’s ASP.NET Core MVC project built around one of our shared hobbies:
+            watching and talking about movies. Together we designed the UI, created a SQL Server
+            database of films, and wired everything up with Entity Framework Core.
+        </p>
+        <a class="btn btn-primary btn-lg me-2" asp-controller="Movies" asp-action="Index">
+            Browse Movie Database
+        </a>
+        <a class="btn btn-outline-secondary btn-lg" asp-controller="Home" asp-action="AboutMovies">
+            Learn About Movies
+        </a>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row g-4">
+        <div class="col-md-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">What Our App Does</h5>
+                    <p class="card-text">
+                        We built a small movie catalog backed by SQL Server. You can see a table of movies,
+                        view details, and experiment with CRUD operations using Entity Framework Core.
+                    </p>
+                    <a asp-controller="Movies" asp-action="Index" class="btn btn-sm btn-primary">
+                        Go to Movies
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Explore the Hobby</h5>
+                    <p class="card-text">
+                        On the About Movies and Genres pages, we explain why our team enjoys films,
+                        briefly walk through movie history, and highlight some favorite genres.
+                    </p>
+                    <a asp-controller="Home" asp-action="AboutMovies" class="btn btn-sm btn-primary">
+                        About Movies
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Meet the Team</h5>
+                    <p class="card-text">
+                        Each team member contributed different pieces: database and migrations, controllers
+                        and models, styling with Bootstrap, and the content pages like this About Me section.
+                    </p>
+                    <a asp-controller="Home" asp-action="FakhruddinShaik" class="btn btn-sm btn-primary">
+                        About Fakhruddin
+                    </a>
+                    <a asp-controller="Home" asp-action="AnthonyThan" class="btn btn-sm btn-primary">
+                        About Anthony
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

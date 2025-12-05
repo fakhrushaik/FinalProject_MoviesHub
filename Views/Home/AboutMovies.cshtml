@@ -1,12 +1,68 @@
 ﻿@{
     ViewData["Title"] = "About Movies";
 }
-<h2>About Movies</h2>
-<p>Movies blend storytelling, visuals, sound, and performance into a unique art form.
-From silent films to streaming blockbusters, the medium keeps evolving.</p>
-<ul>
-  <li><strong>Silent era → Talkies:</strong> 1890s–1930s</li>
-  <li><strong>Studio Golden Age:</strong> 1930s–1950s</li>
-  <li><strong>New Wave & Blockbusters:</strong> 1960s–1980s</li>
-  <li><strong>Digital & Streaming:</strong> 1990s–Now</li>
-</ul>
+
+<div class="container mt-4">
+    <h2 class="mb-3">About Movies</h2>
+
+    <p class="lead">
+        As a team, we chose movies as our shared hobby because films are an easy way to relax,
+        connect with friends, and experience different stories and cultures in just a couple of hours.
+    </p>
+
+    <div class="row g-4">
+        <div class="col-md-7">
+            <h4>Why Our Team Enjoys Movies</h4>
+            <p>
+                We don’t all have the exact same taste, but that makes movie nights more interesting.
+                Some of us like sci-fi and action, others like drama or animation. Together we enjoy
+                comparing what we noticed in a film: the story, the acting, the visuals, and the music.
+            </p>
+            <p>
+                Movies are also a good conversation starter. After watching something, we end up
+                talking about the message of the film, how it connects to real life, and whether
+                we would recommend it to other people.
+            </p>
+
+            <h4 class="mt-4">A Very Short History of Movies</h4>
+            <p>
+                The idea of movies started in the late 1800s when inventors experimented with devices
+                that could show a series of pictures quickly to create the illusion of motion. Over time,
+                this turned into full films shown in theaters.
+            </p>
+            <ul>
+                <li><strong>Silent films (1890s–1920s):</strong> Black-and-white movies with no recorded sound. Music was often played live in the theater.</li>
+                <li><strong>Classic Hollywood (1930s–1950s):</strong> Studios like MGM and Warner Bros. produced big films with famous actors and clear “hero vs. villain” stories.</li>
+                <li><strong>New ideas and blockbusters (1960s–1980s):</strong> Directors experimented with storytelling, and large blockbuster movies like <em>Star Wars</em> and <em>Jaws</em> changed the industry.</li>
+                <li><strong>Digital and streaming era (1990s–today):</strong> Computer graphics, high-quality cameras, and streaming services let people watch movies anywhere and anytime.</li>
+            </ul>
+        </div>
+
+        <div class="col-md-5">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body">
+                    <h5 class="card-title">How MoviesHub Uses Movie Data</h5>
+                    <p class="small">
+                        In this project, we created a simple movie database using SQL Server and
+                        Entity Framework Core. Our <strong>Movies</strong> page reads from the database
+                        and shows a list of films in an HTML table.
+                    </p>
+                    <p class="small">
+                        Each record stores basic information:
+                    </p>
+                    <ul class="small">
+                        <li>Title and director</li>
+                        <li>Release year</li>
+                        <li>Genre</li>
+                        <li>Runtime in minutes</li>
+                        <li>Rating (for example, out of 10)</li>
+                    </ul>
+                    <p class="small mb-0">
+                        This is a small sample today, but the same structure could be extended into a
+                        full watchlist or recommendation site in the future.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
